@@ -1,0 +1,76 @@
+/* html,body{
+  padding: 0px;
+  height: 100%;
+  margin: 0px;
+  padding:0px;
+}
+body{
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  background-image: url("../images/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+header{
+  background-color: rgba(255, 255, 255, 0.54);
+  color: black;
+  height:50px;
+}
+.banner ul{
+  display: flex;
+  list-style-type: none;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+.banner li:hover{
+  box-shadow: inset 0px 0px 5px 1px black;
+}
+.banner li{
+  flex: 1;
+  text-align: center;
+  font-size: 40px;
+  line-height: 50px;
+  cursor: pointer;
+}
+.row1,.row2{
+  display: flex;
+  justify-content: space-around;
+  flex:1;
+  position: relative;
+  margin:30px 0px;
+}
+#tempchart-container,#pressurechart-container,#humiditychart-container,#qualitychart-container{
+
+  height:700px;
+}
+#carouselExampleIndicators{
+  width: 90%;
+  height:900px;
+} */
+/* html{
+  height: 100%;
+} */
+body{
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: url("../images/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/* .container,.row,.carousel-inner{
+  height: 100%;
+} */
+#tempchart-container,#pressurechart-container,#humiditychart-container,#qualitychart-container{
+  height: 700px;
+}
