@@ -4,6 +4,7 @@ function main() {
     $time = $('#time'),
     $txt = $('.txt').eq(0),
     $dmy = $('.dmy').eq(0),
+    $temp = $('a.temp').eq(0),
     source = $select.val();
 
   function renewData() {
@@ -28,6 +29,7 @@ function main() {
 
   $($select.on('change', function() {
     source = $select.val();
+    $temp.attr("href","chart.html?source="+source);
     renewData();
   }));
 

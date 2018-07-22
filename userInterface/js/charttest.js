@@ -3,83 +3,65 @@ var TempChartID="TemperatureRealTimeChart",
     PressureChartID="PressureRealTimeChart",
     QualityChartID="QualityRealTimeChart";
 
-var data=null;
+var source=getUrlParam('source');
+var dataAll=null;
 var previousJson=null;
 var url="../php/charttest.php";
 var initialurl="../php/chartInitial.php";
 var xmlHttp;
-function GetXmlHttpObject()
-{
-xmlHttp=null;
-try
- {
- // Firefox, Opera 8.0+, Safari
- xmlHttp=new XMLHttpRequest();
- }
-catch (e)
- {
- //Internet Explorer
- try
-  {
-  xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
-  }
- catch (e)
-  {
-  xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
- }
-return xmlHttp;
-}
 
-function StateChange(){
-if (xmlHttp.readyState==4)
-  {// 4 = "loaded"
-  if (xmlHttp.status==200)
-    {
-      // 200 = OK
-      var json = xmlHttp.responseText;
-      if(previousJson!=json){
-        data = JSON.parse(json);
-        previousJson=json;
-      }
-    }
+
+function getUrlParam(name) {
+   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+   var r = window.location.search.substr(1).match(reg); //匹配目标参数
+   if (r != null) return unescape(r[2]); return null; //返回参数值
   }
-};
 
 
 function updateAllData() {
-  xmlHttp =GetXmlHttpObject();
-  if (xmlHttp==null)
-  {
-    alert ("Browser does not support HTTP Request");
-    return;
-  }
-  xmlHttp.onreadystatechange=StateChange;
-  xmlHttp.open("GET",url+"?sid="+Math.random(),true);
-  xmlHttp.send(null);
+  $.ajax({
+    url : url,
+    data : {
+      source : source,
+      sid : Math.random()
+    },
+    dataType : "json",
+  })
+  .done(function (data){
+    if(previousJson!=data){
+      dataAll=data;
+      previousJson=data;
+    }
+  })
 }
 
 function initialData() {
-  xmlHttp =GetXmlHttpObject();
-  if (xmlHttp==null)
-  {
-    alert ("Browser does not support HTTP Request");
-    return;
-  }
-  xmlHttp.onreadystatechange=StateChange;
-  xmlHttp.open("GET",initialurl+"?sid="+Math.random(),false);
-  xmlHttp.send(null);
+  $.ajax({
+    url : initialurl,
+    data : {
+      source : source,
+      sid : Math.random()
+    },
+    dataType : "json",
+    async : false
+  })
+  .done(function (data){
+    if(previousJson!=data){
+      dataAll=data;
+      previousJson=data;
+    }
+  })
 }
 
+
 initialData();
+var Ilabel='[{"category":'+JSON.stringify(dataAll.lable)+'}]';
+var Itemperature='[{"data":'+JSON.stringify(dataAll.temperature)+'}]';
+var Ihumidity='[{"data":'+JSON.stringify(dataAll.humidity)+'}]';
+var Ipressure='[{"data":'+JSON.stringify(dataAll.pressure)+'}]';
+var Iquality='[{"data":'+JSON.stringify(dataAll.quality)+'}]';
+
 updateAllData();
-var Ilabel='[{"category":'+JSON.stringify(data.lable)+'}]';
-var Itemperature='[{"data":'+JSON.stringify(data.temperature)+'}]';
-var Ihumidity='[{"data":'+JSON.stringify(data.humidity)+'}]';
-var Ipressure='[{"data":'+JSON.stringify(data.pressure)+'}]';
-var Iquality='[{"data":'+JSON.stringify(data.quality)+'}]';
-
-
 setInterval(function () {updateAllData();}, 2500);
 
 
@@ -119,17 +101,17 @@ FusionCharts.ready(function () {
         dataSource: temperatureDataSource,
        "events": {
           "initialized": function (e) {
-              var previousTime=data.realTime;
+              var previousTime=dataAll.realTime;
                function updateData() {
-                 if(previousTime==data.realTime||data==null){
+                 if(previousTime==dataAll.realTime||dataAll==null){
                    return;
                  }
                  // Get reference to the chart using its ID
                  var chartRef = FusionCharts(TempChartID);
-                 strData = "&label=" + data.realTime + "&value=" + data.temperature;
+                 strData = "&label=" + dataAll.realTime + "&value=" + dataAll.temperature;
                  // Feed it to chart.
                  chartRef.feedData(strData);
-                 previousTime=data.realTime;
+                 previousTime=dataAll.realTime;
                }
 
                var myVar = setInterval(function () {
@@ -177,16 +159,16 @@ FusionCharts.ready(function () {
         dataSource: humidityDataSource,
        "events": {
            "initialized": function (e) {
-                var previousTime=data.realTime;
+                var previousTime=dataAll.realTime;
                function updateData() {
-                 if(previousTime==data.realTime||data==null){
+                 if(previousTime==dataAll.realTime||dataAll==null){
                    return;
                  }
                  var chartRef = FusionCharts(HumidityChartID);
-                 strData = "&label=" + data.realTime + "&value=" + data.humidity;
+                 strData = "&label=" + dataAll.realTime + "&value=" + dataAll.humidity;
                  // Feed it to chart.
                  chartRef.feedData(strData);
-                 previousTime=data.realTime;
+                 previousTime=dataAll.realTime;
                }
 
                var myVar = setInterval(function () {
@@ -235,17 +217,17 @@ FusionCharts.ready(function () {
         dataSource: pressureDataSource,
        "events": {
            "initialized": function (e) {
-             var previousTime=data.realTime;
+             var previousTime=dataAll.realTime;
             function updateData() {
-              if(previousTime==data.realTime||data==null){
+              if(previousTime==dataAll.realTime||dataAll==null){
                 return;
               }
                  // Get reference to the chart using its ID
                  var chartRef = FusionCharts(PressureChartID);
-                 strData = "&label=" + data.realTime + "&value=" + data.pressure;
+                 strData = "&label=" + dataAll.realTime + "&value=" + dataAll.pressure;
                  // Feed it to chart.
                  chartRef.feedData(strData);
-                 previousTime=data.realTime;
+                 previousTime=dataAll.realTime;
                }
 
                var myVar = setInterval(function () {
@@ -293,17 +275,17 @@ FusionCharts.ready(function () {
         dataSource: qualityDataSource,
        "events": {
            "initialized": function (e) {
-             var previousTime=data.realTime;
+             var previousTime=dataAll.realTime;
             function updateData() {
-              if(previousTime==data.realTime||data==null){
+              if(previousTime==dataAll.realTime||dataAll==null){
                 return;
               }
                  // Get reference to the chart using its ID
                  var chartRef = FusionCharts(QualityChartID);
-                 strData = "&label=" + data.realTime + "&value=" + data.quality;
+                 strData = "&label=" + dataAll.realTime + "&value=" + dataAll.quality;
                  // Feed it to chart.
                  chartRef.feedData(strData);
-                 previousTime=data.realTime;
+                 previousTime=dataAll.realTime;
                }
 
                var myVar = setInterval(function () {

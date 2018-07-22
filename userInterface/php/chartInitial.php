@@ -12,7 +12,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "SELECT * FROM data WHERE time>=DATE_SUB(NOW(),INTERVAL 1 DAY) AND source='2' ORDER BY time ASC";
+$sql = "SELECT * FROM data WHERE time>=DATE_SUB(NOW(),INTERVAL 1 DAY) AND source='".$_GET["source"]."' ORDER BY time ASC";
 $result = mysqli_query($conn, $sql);
 
 

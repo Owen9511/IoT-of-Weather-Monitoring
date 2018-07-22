@@ -12,7 +12,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "SELECT * FROM data  WHERE source='2' ORDER BY time DESC";
+$sql = "SELECT * FROM data  WHERE source='".$_GET["source"]."' ORDER BY time DESC";
 $result = mysqli_query($conn, $sql);
 
 $row = mysqli_fetch_assoc($result);
