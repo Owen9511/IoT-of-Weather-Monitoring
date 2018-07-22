@@ -1,96 +1,39 @@
-var xmlHttp;
-var data;
-var url="../php/index.php"
+function main() {
+  var $select = $('#source'),
+    $variable = $('.variable'),
+    $time = $('#time'),
+    source = $select.val();
 
+  function renewData() {
+    // get all weather dtat by ajax get method
+    $.ajax({
+        url: "../php/index.php",
+        data: {
+          source: source,
+          sid: Math.random()
+        },
+        dataType: "json"
+      })
+      .done(function(data) {
+        //renew display
+        $time.text(data.RealTime);
+        $variable.eq(0).text(data.temperature);
+        $variable.eq(1).text(data.humidity);
+        $variable.eq(2).text(data.pressure);
+        $variable.eq(3).text(data.quality);
+      });
+  };
 
-var select = $('#source');
-var source=select.val();
+  $($select.on('change', function() {
+    source = $select.val();
+    renewData();
+  }));
 
-
-
-function GetXmlHttpObject()
-{
-xmlHttp=null;
-try
- {
- // Firefox, Opera 8.0+, Safari
- xmlHttp=new XMLHttpRequest();
- }
-catch (e)
- {
- //Internet Explorer
- try
-  {
-  xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
-  }
- catch (e)
-  {
-  xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
- }
-return xmlHttp;
+  (function cyclicRenew() {
+    //immediately execute renewData() and execute it every 10000ms
+    renewData();
+    setTimeout(cyclicRenew, 10000);
+  })();
 }
 
-function StateChange(){
-if (xmlHttp.readyState==4)
-  {// 4 = "loaded"
-  if (xmlHttp.status==200)
-    {
-      // 200 = OK
-      var json = xmlHttp.responseText;
-        data = JSON.parse(json);
-    }
-  }
-};
-
-
-function updateAllData(status) {
-  xmlHttp =GetXmlHttpObject();
-  if (xmlHttp==null)
-  {
-    alert ("Browser does not support HTTP Request");
-    return;
-  }
-  xmlHttp.onreadystatechange=StateChange;
-  if(status=="init"){
-    xmlHttp.open("GET",url+"?source="+source+"&sid="+Math.random(),false);
-  }
-  else{
-    xmlHttp.open("GET",url+"?source="+source+"&sid="+Math.random(),true);
-  }
-
-  xmlHttp.send(null);
-}
-
-var interval;
-function start(){
-  updateAllData("init");
-
-  document.getElementById("time").innerHTML=data.RealTime;
-  var varible=document.getElementsByClassName("variable");
-  varible[0].innerHTML=data.temperature;
-  varible[1].innerHTML=data.humidity;
-  varible[2].innerHTML=data.pressure;
-  varible[3].innerHTML=data.quality;
-
-
-
-  interval=setInterval(function () {updateAllData("update");
-    document.getElementById("time").innerHTML=data.RealTime;
-  var varible=document.getElementsByClassName("variable");
-  varible[0].innerHTML=data.temperature;
-  varible[1].innerHTML=data.humidity;
-  varible[2].innerHTML=data.pressure;
-  varible[3].innerHTML=data.quality;
-}, 10000);
-}
-start();
-
-
-function sourceChange(){
-  source=select.val();
-  clearInterval(interval);
-  start();
-}
-
-$(select.on('change',sourceChange));
+main();
