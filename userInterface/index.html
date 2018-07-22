@@ -1,49 +1,29 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Weather Monitoring</title>
-<!-- For-Mobile-Apps -->
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta charset="utf-8"/>
-<script>
-addEventListener("load", function() { setTimeout(hideURLbar, 0); });
-function hideURLbar(){ window.scrollTo(0,1); }
-</script>
-<!-- //For-Mobile-Apps -->
-<!-- Style -->
-<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
-<!-- Style -->
-<!-- JavaScript -->
-<script type="text/javascript" src="js/jquery.min.js"></script>
+  <title>Weather Monitoring</title>
+  <!-- For-Mobile-Apps -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <script>
+    addEventListener("load", function() {
+      setTimeout(hideURLbar, 0);
+    });
 
-<script>
-    function startTime() {
-        var today = new Date();
-        var h = today.getHours();
-        var m = today.getMinutes();
-        var s = today.getSeconds();
-        m = checkTime(m);
-        s = checkTime(s);
-        document.getElementsByClassName('txt')[0].innerHTML =
-        h + ":" + m + ":" + s;
-        var t = setTimeout(startTime, 500);
+    function hideURLbar() {
+      window.scrollTo(0, 1);
     }
-    function checkTime(i) {
-        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-        return i;
-    }
-</script>
-
-<!-- Javascript -->
-
-
+  </script>
+  <!-- //For-Mobile-Apps -->
+  <!-- Style -->
+  <link rel="stylesheet" href="css/style.css" type="text/css"/>
+  <!-- Style -->
 </head>
-<body onload="startTime()">
 
-<h1>REAL TIME WEATHER MONITORING</h1>
-
-<div class="container">
-
+<body>
+  <h1>REAL TIME WEATHER MONITORING</h1>
+  <div class="container">
     <div class="city">
       <select id="source">
         <option value="1" selected>14.02.02, George Keonyon Hall</option>
@@ -52,58 +32,59 @@ function hideURLbar(){ window.scrollTo(0,1); }
     </div>
 
     <div class="content">
-
-        <div class="place">
-            <div class="txt">
-
-            </div>
-
-            <div class="dmy">
-              <script type="text/javascript">
-                   var mydate=new Date()
-                   var year=mydate.getYear()
-                   if(year<1000)
-                     year+=1900
-                     var day=mydate.getDay()
-                     var month=mydate.getMonth()
-                     var daym=mydate.getDate()
-                   if(daym<10)
-                     daym="0"+daym
-                     var dayarray=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")
-                     var montharray=new Array("January","February","March","April","May","June","July","August","September","October","November","December")
-                     document.write(""+dayarray[day]+", "+montharray[month]+" "+daym+", "+year+"")
-                </script>
-
-            </div>
-            <div class="timebox">Last Updated:<span id="time"></span></div>
+      <div class="place">
+        <div class="txt">
         </div>
-
-        <div class="temp">
-          <table style="margin: 25px auto">
-            <tr>
-              <td align="left"><p>Temperature:</p></td>
-              <td align="right"><p><span class="variable">0</span>°C</p></td>
-            </tr>
-            <tr>
-              <td align="left"><p>Humidity:</p></td>
-              <td align="right"><p><span class="variable">0</span>%RH</p></td>
-            </tr>
-            <tr>
-              <td align="left"><p>Pressure:</p></td>
-              <td align="right"><p><span class="variable">0</span>hPa</p></td>
-            </tr>
-            <tr>
-              <td align="left"><p>Air Quality:</p></td>
-              <td align="right"><p><span class="variable">0</span></p></td>
-            </tr>
-          </table>
-
+        <div class="dmy">
         </div>
+        <div class="timebox">
+          Last Updated:
+          <span id="time">
+          </span>
+        </div>
+      </div>
 
+      <div class="temp">
+        <table>
+          <tr>
+            <td>
+              <p>Temperature:</p>
+            </td>
+            <td>
+              <p><span class="variable">0</span>°C</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Humidity:</p>
+            </td>
+            <td>
+              <p><span class="variable">0</span>%RH</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Pressure:</p>
+            </td>
+            <td>
+              <p><span class="variable">0</span>hPa</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Air Quality:</p>
+            </td>
+            <td>
+              <p><span class="variable">0</span></p>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
-
-</div>
-
+  </div>
 </body>
+<!-- JavaScript -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
+<!-- JavaScript -->
 </html>
