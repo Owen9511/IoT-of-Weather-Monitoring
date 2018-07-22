@@ -1,0 +1,335 @@
+/*-- Reset Code --*/
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
+ol,ul{list-style:none;}
+blockquote,q{quotes:none;}
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+table{border-collapse:collapse;border-spacing:0;}
+/*-- Reset Code --*/
+
+/*-- Fonts --*/
+@font-face{
+  font-family: 'Oswald-Light';
+  src:url(../fonts/Oswald-Light.ttf) format('truetype');
+}
+@font-face{
+  font-family: 'Gotham-Book';
+  src:url(../fonts/Gotham-Book.ttf) format('truetype');
+}
+/*-- Fonts --*/
+
+/*-- Index - Page - styling --*/
+html{
+  min-height: 100%;
+}
+body {
+	background-image: url("../images/bg.jpg");
+  background-color: #eee;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  font-family: 'Oswald-Light';
+  -moz-user-select:none;
+  -webkit-user-select:none;
+  -ms-user-select:none;
+  -khtml-user-select:none;
+  user-select:none;
+}
+
+h1 {
+    text-align: center;
+    font-size: 38px;
+    margin: 50px 0;
+}
+
+.container {
+    width: 35%;
+    margin: 0 auto;
+}
+
+.city {
+    background-color: #EEE;
+}
+
+.place {
+  position: relative;
+    width: 50%;
+    float: left;
+    text-align: center;
+    height: 225px;
+    background-color: rgba(255, 255, 255, 0.54);
+}
+.content{
+  height: 300px;
+}
+.txt {
+    font-size: 45px;
+    margin: 35px 0;
+    font-family: Gotham-Book;
+}
+.dmy {
+    font-size: 25px;
+}
+.temp {
+    width: 50%;
+    float: left;
+    background: rgba(169, 169, 169, 0.26);
+    text-align: center;
+    height: 300px;
+}
+.temp::after{
+  display: block;
+  clear: both;
+  visibility: hidden;
+}
+
+.temp p {
+    font-size: 25px;
+    margin-top: 10px;
+    color: #EEE;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url("../images/menu.png") 96% no-repeat #eee;
+  display:block;
+  font-weight: bold;
+  font-size: 23px;
+  border: none;
+  outline:none;
+  padding: 10px 50px;
+  font-family: 'Oswald-Light';
+  margin: auto;
+  cursor: pointer;
+}
+
+
+.timebox{
+  position: absolute;
+  font-size: 2px;
+  padding-left: 3px;
+  width: 100%;
+  bottom: 5px;
+  text-align: left;
+  margin: 5px 0px;
+  color:grey;
+}
+
+/* CAUTION: IE hackery ahead */
+select::-ms-expand {
+    display: none; /* remove default arrow in IE 10 and 11 */
+}
+
+/* target Internet Explorer 9 to undo the custom arrow */
+@media screen and (min-width:0\0) {
+    select {
+        background:none\9;
+        padding: 5px\9;
+    }
+}
+/*-- Index - Page - styling --*/
+
+/*-- Responsive - Code --*/
+
+@media screen and (max-width: 1920px) {
+    h1 {
+        font-size: 50px;
+        margin: 100px 0;
+    }
+    .container {
+        width: 40%;
+    }
+    select {
+        font-size: 25px;
+        padding: 10px 50px;
+    }
+    .place {
+        height: 300px;
+    }
+    .txt {
+        font-size: 50px;
+        margin: 65px 0px;
+    }
+    .dmy {
+        font-size: 30px;
+    }
+    .temp p {
+        font-size: 30px;
+        margin-top: 10px;
+    }
+}
+
+
+
+@media screen and (max-width: 1440px) {
+    h1 {
+        margin: 75px 0px;
+    }
+}
+
+@media screen and (max-width: 1366px) {
+    h1 {
+        margin: 40px 0px;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .container {
+        width: 45%;
+    }
+    .temp p {
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .container {
+        width: 55%;
+    }
+}
+
+@media screen and (max-width: 966px) {
+    .container {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 853px) {
+    h1 {
+        margin: 10px 0px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .container {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        margin: 40px 0px;
+    }
+}
+
+@media screen and (max-width: 736px) {
+    .container {
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 667px) {
+    h1 {
+        font-size: 45px;
+    }
+    .container {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 603px) {
+    .container {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 568px) {
+    h1 {
+        font-size: 45px;
+    }
+    .dmy {
+        font-size: 27px;
+    }
+}
+
+@media screen and (max-width: 533px) {
+    .dmy {
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 40px;
+    }
+    .container {
+        width: 95%;
+    }
+    .temp p {
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    h1 {
+        font-size: 35px;
+    }
+    select {
+        font-size: 23px;
+        padding: 10px 40px;
+    }
+    .place {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .temp {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 384px) {
+    h1 {
+        font-size: 32px;
+    }
+    .temp p {
+        margin-top: 10px;
+    }
+    select {
+        font-size: 21px;
+        padding: 10px 38px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    h1 {
+        font-size: 30px;
+    }
+    .place {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .temp {
+        width: 100%;
+        background: rgba(169, 169, 169, 0.26);
+    }
+    .temp p {
+        margin-top: 10px;
+    }
+    .footer p {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    h1 {
+        font-size: 28px;
+    }
+    .place {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .temp {
+        width: 100%;
+    }
+    .temp p {
+        margin-top: 10px;
+    }
+}
+
+
+
+
+
+/*-- Responsive - Code --*/
