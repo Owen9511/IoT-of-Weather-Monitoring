@@ -31,10 +31,11 @@ table {
   border-spacing: 0;
 }
 
-a,a:hover, a:visited, a:link, a:active {
-    text-decoration: none;
-    color: inherit;
+a, a:hover, a:visited, a:link, a:active {
+  text-decoration: none;
+  color: inherit;
 }
+
 /*-- Reset Code --*/
 
 /*-- Fonts --*/
@@ -118,12 +119,12 @@ h1 {
   height: 300px;
 }
 
-.temp:hover{
-  box-shadow: 0 0 20px rgba(0,0,0,1);
+.temp:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 1);
 }
 
-.temp:active{
-  box-shadow: 0 0 20px rgba(0,0,0,1) inset;
+.temp:active {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 1) inset;
 }
 
 .temp table {

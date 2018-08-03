@@ -14,7 +14,7 @@ if (!$conn) {
 
 $sql = "SELECT * FROM data WHERE time>=DATE_SUB(NOW(),INTERVAL 1 DAY) AND source='".$_GET["source"]."' ORDER BY time ASC";
 $result = mysqli_query($conn, $sql);
-
+$resultNum=mysqli_num_rows($result);
 
 
 function is_dst($timestamp,$source)
@@ -54,7 +54,7 @@ while($row = mysqli_fetch_assoc($result)){
   array_push($quality,$Tquality);
 }
 
-$data=array("lable"=>$lable,"temperature"=>$temperature,"humidity"=>$humidity,"pressure"=>$pressure,"quality"=>$quality);
+$data=array("lable"=>$lable,"temperature"=>$temperature,"humidity"=>$humidity,"pressure"=>$pressure,"quality"=>$quality,"resultNum"=>$resultNum);
 $json=json_encode($data);
 
 echo $json;

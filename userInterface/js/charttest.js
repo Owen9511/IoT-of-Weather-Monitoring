@@ -12,9 +12,11 @@ var xmlHttp;
 
 
 function getUrlParam(name) {
-   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-   var r = window.location.search.substr(1).match(reg); //匹配目标参数
-   if (r != null) return unescape(r[2]); return null; //返回参数值
+   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+   var r = window.location.search.substr(1).match(reg);
+   if (r != null)
+    return unescape(r[2]);
+  return null;
   }
 
 
@@ -35,7 +37,7 @@ function updateAllData() {
   })
 }
 
-function initialData() {
+(function initialData() {
   $.ajax({
     url : initialurl,
     data : {
@@ -46,32 +48,33 @@ function initialData() {
     async : false
   })
   .done(function (data){
-    if(previousJson!=data){
       dataAll=data;
       previousJson=data;
-    }
+      chart();
   })
-}
+})();
 
 
-initialData();
-var Ilabel='[{"category":'+JSON.stringify(dataAll.lable)+'}]';
-var Itemperature='[{"data":'+JSON.stringify(dataAll.temperature)+'}]';
-var Ihumidity='[{"data":'+JSON.stringify(dataAll.humidity)+'}]';
-var Ipressure='[{"data":'+JSON.stringify(dataAll.pressure)+'}]';
-var Iquality='[{"data":'+JSON.stringify(dataAll.quality)+'}]';
+
 
 updateAllData();
 setInterval(function () {updateAllData();}, 2500);
 
 
+function chart(){
+
+  var Ilabel='[{"category":'+JSON.stringify(dataAll.lable)+'}]';
+  var Itemperature='[{"data":'+JSON.stringify(dataAll.temperature)+'}]';
+  var Ihumidity='[{"data":'+JSON.stringify(dataAll.humidity)+'}]';
+  var Ipressure='[{"data":'+JSON.stringify(dataAll.pressure)+'}]';
+  var Iquality='[{"data":'+JSON.stringify(dataAll.quality)+'}]';
 
 var temperatureDataSource='{\
     "chart": {\
       "captionFontSize": "20",\
       "outCnvBaseFontSize": "11",\
       "caption": "Temperature",\
-      "labelStep": "36",\
+      "labelStep": "'+Math.floor(dataAll.resultNum/15)+'",\
       "canvasBgAlpha": "0",\
       "bgImage":"../images/1.jpg",\
       "bgImageAlpha": "50",\
@@ -79,7 +82,7 @@ var temperatureDataSource='{\
       "numberSuffix": "°C",\
       "refreshinterval": "1",\
       "setAdaptiveYMin":"1",\
-      "numdisplaysets": "288",\
+      "numdisplaysets": "'+dataAll.resultNum+'",\
       "drawAnchors": "0",\
       "labeldisplay": "rotate",\
       "slantLabel": "1",\
@@ -90,6 +93,9 @@ var temperatureDataSource='{\
     "categories":'+Ilabel+',\
     "dataset":'+Itemperature+'\
 }';
+
+
+
 FusionCharts.ready(function () {
     var tempChart = new FusionCharts({
         id: TempChartID,
@@ -137,7 +143,7 @@ var humidityDataSource='{\
       "numberSuffix": "%",\
       "refreshinterval": "1",\
       "setAdaptiveYMin":"1",\
-      "numdisplaysets": "288",\
+      "numdisplaysets": "'+dataAll.resultNum+'",\
       "drawAnchors": "0",\
       "labeldisplay": "rotate",\
       "slantLabel": "1",\
@@ -195,7 +201,7 @@ var pressureDataSource='{\
       "formatNumberScale": "0",\
       "refreshinterval": "1",\
       "setAdaptiveYMin":"1",\
-      "numdisplaysets": "288",\
+      "numdisplaysets": "'+dataAll.resultNum+'",\
       "drawAnchors": "0",\
       "labeldisplay": "rotate",\
       "slantLabel": "1",\
@@ -245,7 +251,7 @@ var qualityDataSource='{\
       "captionFontSize": "20",\
       "outCnvBaseFontSize": "11",\
       "caption": "Air Quality",\
-      "labelStep": "36",\
+      "labelStep": "20",\
       "canvasBgAlpha": "0",\
       "bgImage":"../images/2.jpg",\
       "bgImageAlpha": "40",\
@@ -253,7 +259,7 @@ var qualityDataSource='{\
       "paletteColors": "#0075c2",\
       "refreshinterval": "1",\
       "setAdaptiveYMin":"1",\
-      "numdisplaysets": "288",\
+      "numdisplaysets": "'+dataAll.resultNum+'",\
       "drawAnchors": "0",\
       "labeldisplay": "rotate",\
       "slantLabel": "1",\
@@ -296,3 +302,4 @@ FusionCharts.ready(function () {
     })
     .render();
 });
+}

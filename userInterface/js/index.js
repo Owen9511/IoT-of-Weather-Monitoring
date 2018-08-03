@@ -29,7 +29,7 @@ function main() {
 
   $($select.on('change', function() {
     source = $select.val();
-    $temp.attr("href","chart.html?source="+source);
+    $temp.attr("href", "chart.html?source=" + source);
     renewData();
   }));
 
